@@ -2,6 +2,10 @@ import { Suspense } from "react";
 import CabinList from "../_components/CabinList";
 import { getCabins } from "../_lib/data-service";
 import Spinner from "../_components/Spinner";
+
+//in seconds
+// export const revalidate = 60;
+
 export const metadata = {
   title: "Cabins"
 }
@@ -20,6 +24,7 @@ export default function Page() {
         away from home. The perfect spot for a peaceful, calm vacation. Welcome
         to paradise.
       </p>
+       {/* this will be the dynamic hole */}
       <Suspense fallback={<Spinner />}>
         <CabinList />
       </Suspense>
