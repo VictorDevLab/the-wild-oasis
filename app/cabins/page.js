@@ -4,7 +4,7 @@ import { getCabins } from "../_lib/data-service";
 import Spinner from "../_components/Spinner";
 
 //in seconds
-// export const revalidate = 60;
+export const revalidate = 0;
 
 export const metadata = {
   title: "Cabins"
