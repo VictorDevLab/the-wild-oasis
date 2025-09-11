@@ -1,9 +1,10 @@
-import DateSelector from "@/app/_components/DateSelector";
-import ReservationForm from "@/app/_components/ReservationForm";
+import Reservation from "@/app/_components/Reservation";
+import Spinner from "@/app/_components/Spinner";
 import TextExpander from "@/app/_components/TextExpander";
-import { getBookedDatesByCabinId, getCabin, getCabins, getSettings } from "@/app/_lib/data-service";
+import { getCabin, getCabins } from "@/app/_lib/data-service";
 import { EyeSlashIcon, MapPinIcon, UsersIcon } from "@heroicons/react/24/solid";
 import Image from "next/image";
+import { Suspense } from "react";
 
 export const revalidate = 0;
 
@@ -21,11 +22,7 @@ export async function generateStaticParams(params) {
 
 export default async function Page({ params }) {
     const cabin = await getCabin(params.cabinId)
-    const settings = await getSettings()
-    const bookedDates = await getBookedDatesByCabinId(params.cabinId)
-
-    const { id, name, maxCapacity, regularPrice, discount, image, description } =
-        cabin;
+    const { id, name, maxCapacity, regularPrice, discount, image, description } = cabin;
 
     return (
         <div className="max-w-6xl mx-auto mt-8">
@@ -72,10 +69,9 @@ export default async function Page({ params }) {
                 <h2 className="text-5xl font-semibold text-center mb-10 text-accent-400">
                     Reserve {name} today. Pay on arrival.
                 </h2>
-                <div className="grid grid-cols-2 border border-primary-800 min-h-[400px]">
-                    <DateSelector />
-                    <ReservationForm />
-                </div>
+                <Suspense fallback={<Spinner />}>
+                    <Reservation cabin={cabin} />
+                </Suspense>
             </div>
         </div>
     );
