@@ -7,7 +7,9 @@ async function CabinList({ filter }) {
     noStore()
     const cabins = await getCabins()
     if (!cabins.length) return null;
+
     let displayedCabins;
+    
     if (filter === "all") {
         displayedCabins = cabins;
     }
