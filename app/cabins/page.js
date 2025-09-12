@@ -3,6 +3,7 @@ import CabinList from "../_components/CabinList";
 import { getCabins } from "../_lib/data-service";
 import Spinner from "../_components/Spinner";
 import Filter from "../_components/Filter";
+import ReservationReminder from "../_components/ReservationReminder";
 
 //in seconds
 export const revalidate = 0;
@@ -33,6 +34,7 @@ export default function Page({searchParams}) {
        {/* this will be the dynamic hole */}
       <Suspense fallback={<Spinner />} key={filter} >
         <CabinList filter={filter} />
+        <ReservationReminder />
       </Suspense>
     </div>
   );
