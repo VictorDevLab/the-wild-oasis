@@ -4,7 +4,7 @@ export const metadata = {
   title: "Reservations"
 }
 export default function Page() {
-  // CHANGE
+  
   const bookings = [];
 
   return (
