@@ -77,7 +77,6 @@ export async function getBooking(id) {
 }
 
 export async function getBookings(guest_Id) {
-  console.log("guest_id---",guest_Id)
   const { data, error, count } = await supabase
     .from('bookings')
     // We actually also need data on the cabins as well. But let's ONLY take the data that we actually need, in order to reduce downloaded data.
@@ -161,21 +160,21 @@ export async function createGuest(newGuest) {
   return data;
 }
 
-export async function createBooking(newBooking) {
-  const { data, error } = await supabase
-    .from('bookings')
-    .insert([newBooking])
-    // So that the newly created object gets returned!
-    .select()
-    .single();
+// export async function createBooking(newBooking) {
+//   const { data, error } = await supabase
+//     .from('bookings')
+//     .insert([newBooking])
+//     // So that the newly created object gets returned!
+//     .select()
+//     .single();
 
-  if (error) {
-    console.error(error);
-    throw new Error('Booking could not be created');
-  }
+//   if (error) {
+//     console.error(error);
+//     throw new Error('Booking could not be created');
+//   }
 
-  return data;
-}
+//   return data;
+// }
 
 /////////////
 // UPDATE

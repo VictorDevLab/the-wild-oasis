@@ -95,3 +95,35 @@ export async function updateBooking(formData) {
   //7) Redirecting
   redirect("/account/reservations");
 }
+
+export async function createBooking(bookingData, formData) {
+  //form data needs to be the last argument.
+  const session = await auth();
+  if (!session) throw new Error("You must be logged in");
+
+  const newBooking = {
+    ...bookingData,
+    guest_Id: session.user.guest_Id,
+    number_of_nights: Number(formData.get("numNights")),
+    number_of_guests: Number(formData.get("numGuests")),
+    observations: formData.get("observations").slice(0, 1000),
+    extras_price: 0,
+    total_price: bookingData.cabinPrice,
+    has_paid: false,
+    has_breakfast: false,
+    status: "Unconfirmed",
+  };
+
+  console.log(newBooking);
+  const { data, error } = await supabase.from("bookings").insert([newBooking]);
+  // .select()
+  // .single();
+
+  if (error) {
+    console.error(error);
+    throw new Error("Booking could not be created");
+  }
+
+  revalidatePath(`/cabin/${bookingData.cabin_Id}`);
+  redirect("/cabins/thankyou");
+}

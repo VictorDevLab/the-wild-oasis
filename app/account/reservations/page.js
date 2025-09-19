@@ -7,7 +7,6 @@ export const metadata = {
 }
 export default async function Page() {
   const session = await auth()
-  console.log("session", session)
   const bookings = await getBookings(session.user.guest_Id);
 
   return (
