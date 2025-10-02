@@ -97,6 +97,8 @@ export async function updateBooking(formData) {
 }
 
 export async function createBooking(bookingData, formData) {
+  console.log("booking data", bookingData)
+  console.log("formData", formData)
   //form data needs to be the last argument.
   const session = await auth();
   if (!session) throw new Error("You must be logged in");
@@ -104,17 +106,17 @@ export async function createBooking(bookingData, formData) {
   const newBooking = {
     ...bookingData,
     guest_Id: session.user.guest_Id,
-    number_of_nights: Number(formData.get("numNights")),
-    number_of_guests: Number(formData.get("numGuests")),
+    number_of_nights: Number(bookingData.number_of_nights),
+    number_of_guests: Number(formData.get("number_of_guests")),
     observations: formData.get("observations").slice(0, 1000),
     extras_price: 0,
-    total_price: bookingData.cabinPrice,
+    total_price: bookingData.cabin_price,
     has_paid: false,
     has_breakfast: false,
     status: "Unconfirmed",
   };
 
-  console.log(newBooking);
+  console.log("new booking", newBooking);
   const { data, error } = await supabase.from("bookings").insert([newBooking]);
   // .select()
   // .single();
