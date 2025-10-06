@@ -114,6 +114,7 @@ export async function createBooking(bookingData, formData) {
     has_paid: false,
     has_breakfast: false,
     status: "Unconfirmed",
+    
   };
 
   console.log("new booking", newBooking);
