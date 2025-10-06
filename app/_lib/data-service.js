@@ -90,6 +90,7 @@ export async function getBookings(guest_Id) {
     console.error(error);
     throw new Error('Bookings could not get loaded');
   }
+  
 
   return data;
 }
