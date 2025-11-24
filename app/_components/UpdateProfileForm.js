@@ -11,7 +11,7 @@ function UpdateProfileForm({ guest, children }) {
   return (
     <form
       action={updateGuest}
-      className="bg-primary-900 py-8 px-12 text-lg flex gap-6 flex-col"
+      className="bg-primary-900 py-6 sm:py-8 px-4 sm:px-8 md:px-12 text-lg flex gap-6 flex-col w-full max-w-3xl"
     >
       <div className="space-y-2">
         <label>Full name</label>
@@ -36,11 +36,7 @@ function UpdateProfileForm({ guest, children }) {
       <div className="space-y-2">
         <div className="flex items-center justify-between">
           <label htmlFor="nationality">Where are you from?</label>
-          <img
-            src={countryFlag}
-            alt="Country flag"
-            className="h-5 rounded-sm"
-          />
+          <img src={countryFlag} alt="Country flag" className="h-5 rounded-sm hidden sm:inline-block" />
         </div>
 
         {children}
